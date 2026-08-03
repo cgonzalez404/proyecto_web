@@ -1,0 +1,70 @@
+:host {
+  display: block;
+}
+
+.portafolio-shell {
+  padding: 2rem;
+  color: #0f172a;
+}
+
+.portafolio-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.eyebrow {
+  margin: 0;
+  color: #2563eb;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+h1 {
+  margin: 0.35rem 0 0;
+  font-size: 2rem;
+}
+
+.metrics-card {
+  min-width: 220px;
+  padding: 1rem 1.25rem;
+  border-radius: 1rem;
+  background: linear-gradient(135deg, #eff6ff, #dbeafe);
+  box-shadow: 0 12px 30px rgba(37, 99, 235, 0.12);
+}
+
+.metrics-card span,
+.label {
+  display: block;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  color: #64748b;
+}
+
+.metrics-card strong,
+.portfolio-footer strong {
+  font-size: 1.35rem;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+  background: #ffffff;
+  border-radius: 1rem;
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+}
+
+.company-cell {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.portfolio-footer {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: flex-end;
+}

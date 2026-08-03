@@ -1,0 +1,70 @@
+<section class="portafolio-shell">
+  <div class="portafolio-header">
+    <div>
+      <p class="eyebrow">Resumen de inversiones</p>
+      <h1>Portafolio</h1>
+    </div>
+
+    <div class="metrics-card">
+      <span>Valor total</span>
+      <strong>{{ formatCurrency(getPortfolioTotal()) }}</strong>
+    </div>
+  </div>
+
+  <div *ngIf="errorMessage" class="alert alert-warning" role="alert">
+    {{ errorMessage }}
+  </div>
+
+  <div class="table-wrapper">
+    <table class="table table-hover align-middle">
+      <thead>
+        <tr>
+          <th>Empresa</th>
+          <th>Cantidad</th>
+          <th>Precio de compra</th>
+          <th>Precio actual</th>
+          <th>Valor total</th>
+          <th>Ganancia/Pérdida</th>
+          <th>Rendimiento %</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let row of rows">
+          <td>
+            <div class="company-cell">
+              <span class="badge text-bg-light">{{ row.symbol }}</span>
+              <strong>{{ row.company }}</strong>
+            </div>
+          </td>
+          <td>{{ row.quantity }}</td>
+          <td>{{ formatCurrency(row.purchasePrice) }}</td>
+          <td>{{ formatCurrency(row.currentPrice) }}</td>
+          <td>{{ formatCurrency(row.totalValue) }}</td>
+          <td [class.text-success]="row.gainLoss >= 0" [class.text-danger]="row.gainLoss < 0">
+            {{ formatCurrency(row.gainLoss) }}
+          </td>
+          <td [class.text-success]="row.rendimento >= 0" [class.text-danger]="row.rendimento < 0">
+            {{ formatPercent(row.rendimento) }}
+          </td>
+        </tr>
+
+        <tr *ngIf="loading">
+          <td colspan="7" class="text-center py-4">Cargando cotizaciones actuales…</td>
+        </tr>
+
+        <tr *ngIf="!loading && rows.length === 0">
+          <td colspan="7" class="text-center py-4">No hay posiciones disponibles en el portafolio.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="portfolio-footer">
+    <div>
+      <span class="label">Resultado neto</span>
+      <strong [class.text-success]="getPortfolioGainLoss() >= 0" [class.text-danger]="getPortfolioGainLoss() < 0">
+        {{ formatCurrency(getPortfolioGainLoss()) }}
+      </strong>
+    </div>
+  </div>
+</section>
