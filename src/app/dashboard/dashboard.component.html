@@ -1,0 +1,61 @@
+<section class="dashboard-shell">
+  <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
+    <div>
+      <p class="text-primary fw-semibold mb-1 text-uppercase small">Panel financiero</p>
+      <h1 class="mb-0">Dashboard</h1>
+    </div>
+  </div>
+
+  <div *ngIf="errorMessage" class="alert alert-warning" role="alert">
+    {{ errorMessage }}
+  </div>
+
+  <div class="row g-4 mb-4">
+    <div class="col-md-6 col-xl-3">
+      <div class="card shadow-sm border-0 h-100">
+        <div class="card-body">
+          <p class="text-muted mb-1">Capital invertido</p>
+          <h3 class="mb-0">{{ formatCurrency(getCapitalInvertido()) }}</h3>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-xl-3">
+      <div class="card shadow-sm border-0 h-100">
+        <div class="card-body">
+          <p class="text-muted mb-1">Capital actual</p>
+          <h3 class="mb-0">{{ formatCurrency(getCapitalActual()) }}</h3>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-xl-3">
+      <div class="card shadow-sm border-0 h-100">
+        <div class="card-body">
+          <p class="text-muted mb-1">Ganancias</p>
+          <h3 class="mb-0 text-success">{{ formatCurrency(getGanancias()) }}</h3>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-xl-3">
+      <div class="card shadow-sm border-0 h-100">
+        <div class="card-body">
+          <p class="text-muted mb-1">Pérdidas</p>
+          <h3 class="mb-0 text-danger">{{ formatCurrency(getPerdidas()) }}</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card shadow-sm border-0">
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h5 class="mb-0">Historial de compras y ventas</h5>
+      </div>
+      <div style="height: 340px;">
+        <canvas #portfolioChart></canvas>
+      </div>
+    </div>
+  </div>
+</section>
