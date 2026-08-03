@@ -85,6 +85,43 @@ export class PortafolioComponent implements OnInit {
     }
   }
 
+  async sellPosition(symbol: string, quantity: number): Promise<void> {
+    const token = localStorage.getItem('stockmarket_token');
+
+    if (!token) {
+      this.errorMessage = 'Debes iniciar sesión para vender acciones.';
+      return;
+    }
+
+    try {
+      const response = await fetch('http://localhost:4000/api/portfolio/sell', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify({ symbol, quantity })
+      });
+
+      const payload = await response.json();
+
+      if (!response.ok || !payload.success) {
+        this.errorMessage = payload.message || 'No se pudo completar la venta.';
+        return;
+      }
+
+      const target = this.holdings.find((item) => item.symbol === symbol);
+      if (target) {
+        target.quantity = Math.max(0, target.quantity - quantity);
+      }
+
+      this.errorMessage = '';
+      await this.loadPortfolio();
+    } catch {
+      this.errorMessage = 'No fue posible contactar el servicio de venta.';
+    }
+  }
+
   private async fetchQuote(symbol: string): Promise<QuoteResponse | null> {
     const response = await fetch(`http://localhost:4000/api/market/quote?symbol=${symbol}`);
     const payload = (await response.json()) as QuoteResponse;

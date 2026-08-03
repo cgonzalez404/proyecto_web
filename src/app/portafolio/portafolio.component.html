@@ -26,6 +26,7 @@
           <th>Valor total</th>
           <th>Ganancia/Pérdida</th>
           <th>Rendimiento %</th>
+          <th>Acción</th>
         </tr>
       </thead>
       <tbody>
@@ -45,6 +46,11 @@
           </td>
           <td [class.text-success]="row.rendimento >= 0" [class.text-danger]="row.rendimento < 0">
             {{ formatPercent(row.rendimento) }}
+          </td>
+          <td>
+            <button class="btn btn-outline-danger btn-sm" type="button" (click)="sellPosition(row.symbol, 1)">
+              Vender
+            </button>
           </td>
         </tr>
 
