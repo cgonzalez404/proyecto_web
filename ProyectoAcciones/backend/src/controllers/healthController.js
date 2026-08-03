@@ -1,7 +1,9 @@
+const { healthModel } = require('../models');
+
 const healthCheck = (_req, res) => {
   res.json({
     success: true,
-    service: 'stockmarket-pro-backend',
+    ...healthModel,
     status: 'ok',
   });
 };
